@@ -65,16 +65,24 @@ const searchTorrent = (searchText) => (
 
 const searchMiddleware = async (req, res, next) => {
     const { search } = req.query;
-    TorrentSearchApi.enableProvider("1337x");
-
-    searchTorrent(search).then(torrentArray => {
-        req.torrentArray = torrentArray;
-        return next();
-    }).catch(err => {
-        console.log("🟥 Error from searchTorrent function");
+    try{
+        if(!search){
+            return res.status(500).send("error");
+        }
+        TorrentSearchApi.enableProvider("1337x");
+    
+        searchTorrent(search).then(torrentArray => {
+            req.torrentArray = torrentArray;
+            return next();
+        }).catch(err => {
+            console.log("🟥 Error from searchTorrent function");
+            console.log(err);
+            return res.status(500).send("error");
+        });
+    }catch(err){
         console.log(err);
         return res.status(500).send("error");
-    });
+    }
 }
 
 module.exports = searchMiddleware;
