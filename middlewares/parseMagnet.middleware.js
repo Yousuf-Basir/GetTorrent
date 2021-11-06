@@ -30,7 +30,7 @@ const parseMagnet = (req, res, next) => {
             next()
         }
     } catch (err) { 
-        console.log(err);
+        // That means it's not a magnet
         next()
      }
 }
