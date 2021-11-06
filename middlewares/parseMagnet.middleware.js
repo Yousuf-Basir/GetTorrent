@@ -1,5 +1,5 @@
 const parseTorrent = require("parse-torrent");
-const WebTorrent = require("WebTorrent");
+const WebTorrent = require("webtorrent");
 const formateByte = require("../libs/formateByte");
 
 const parseMagnet = (req, res, next) => {
