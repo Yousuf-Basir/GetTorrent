@@ -69,6 +69,7 @@ const searchMiddleware = async (req, res, next) => {
         if(!search){
             return res.status(500).send("error");
         }
+
         TorrentSearchApi.enableProvider("1337x");
     
         searchTorrent(search).then(torrentArray => {
