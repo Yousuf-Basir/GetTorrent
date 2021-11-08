@@ -9,9 +9,9 @@ const getImage = (desc) => {
         new Promise((resolve) => {
             request(desc, (error, response, body) => {
                 const $ = cherio.load(body);
-                const src = $(".movie-detail .movie-img>img").attr("src");
+                const src = $("div.torrent-image img").attr("src");
                 if (src) {
-                    resolve(src);
+                    resolve(src.replace("//", "https://"));
                 } else {
                     resolve(null)
                 }
@@ -55,7 +55,7 @@ const searchTorrent = () => (
 const cronTop100 = () => {
     // 1337x
     // TorrentSearchApi.enableProvider("Torrent9");
-    TorrentSearchApi.enableProvider("Torrent9");
+    TorrentSearchApi.enableProvider("1337x");
     
 
     searchTorrent().then(torrentArray => {
